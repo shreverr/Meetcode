@@ -1,12 +1,22 @@
-const express = require('express')
-require('dotenv').config()
-const app = express()
-const port = process.env.PORT
+const express = require('express');
+const dotenv = require('dotenv').config();
+const mongoose = require('mongoose');
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+const app = express();
+const port = process.env.PORT || 3000;
+const router = require("./routes/index");
+
+app.use('/', router);
+
+mongoose.connect(process.env.MONGODB_URI);
+
+//checks status of connection
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error: "));
+db.once("open",  () => {
+  console.log("Connected successfully");
+});
 
 app.listen(port, () => {
-  console.log(`Meetcode server is listening on port ${port}`)
-})
+  console.log(`Meetcode server is listening on port ${port}`);
+});
