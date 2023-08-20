@@ -1,8 +1,17 @@
 const mongoose = require('mongoose');
 
 const meetingSchema = new mongoose.Schema({
-  meetingid: String,
-  host: String,
+  meetingid: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  host: {
+    type: String,
+    required: true,
+  },
 });
 
 const Meeting = mongoose.model('Meeting', meetingSchema);
+
+module.exports = Meeting;
