@@ -7,14 +7,14 @@ exports.registerUser = async (req, res) => {
 
     const newUser = await User.create(req.body);
     newUser.save();
-    res.status(200).send('Registered Successfully');
+    return res.status(200).send('Registered Successfully');
   } catch (error) {
     console.log(error);
   }
 };
 
 exports.loginUser = (req, res) => {
-  res.status(200).send('Login succesful');
+  return res.status(200).send('Login succesful');
 };
 
 exports.logoutUser = (req, res, next) => {
@@ -23,6 +23,6 @@ exports.logoutUser = (req, res, next) => {
       return next(err);
     }
   });
-  res.redirect('/');
+  return res.redirect('/');
 };
 

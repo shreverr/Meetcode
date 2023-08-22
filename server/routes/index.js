@@ -1,8 +1,9 @@
 /* eslint new-cap: ["error", { "capIsNewExceptions": ["Router"] }] */
 const router = require('express').Router();
+const meetingRouter = require('./meetingRoutes');
+const authRouter = require('./authRoutes');
 
-router.get('/', (req, res) => {
-  res.send('Hello, Express!');
-});
+router.use('/', meetingRouter);
+router.use('/auth', authRouter);
 
 module.exports = router;
