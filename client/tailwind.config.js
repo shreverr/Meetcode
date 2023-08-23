@@ -1,9 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ['media'],
-  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
   theme: {
+    extend: {},
   },
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
-}
-
+  plugins: [],
+};
