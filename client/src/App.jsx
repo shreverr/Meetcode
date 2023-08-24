@@ -1,10 +1,9 @@
 import React from 'react';
+import Home from './pages/Home';
 
 function App() {
   return (
-    <div className="text-2xl bg-sky-300">
-      google is an evil corp
-    </div>
+    <Home />
   );
 }
 
