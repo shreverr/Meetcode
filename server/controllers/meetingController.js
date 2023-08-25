@@ -8,7 +8,7 @@ exports.createNewMeeting = async (req, res) => {
     };
 
     if (await Meeting.findOne({host: req.user.email})) {
-      return res.send('user already has a meeting');
+      return res.status(208).send('user already has a meeting');
     };
 
     const newMeetingData = {
@@ -33,17 +33,13 @@ exports.deleteMeeting = async (req, res) => {
     };
 
     const meetingToDelete = await Meeting.findOne({
-      meetingid: req.body.meetingid,
+      host: req.user.email,
     });
     if (!meetingToDelete) {
       return res.status(404).send('Requested meeting not found');
     }
-    console.log(meetingToDelete.host, req.user.email);
-    if (meetingToDelete.host !== req.user.email) {
-      return res.status(401).send('Only host can delete the meeting');
-    }
 
-    await Meeting.deleteOne();
+    meetingToDelete.deleteOne();
 
     return res.status(200).send('Meeting deleted successfully');
   } catch (error) {
@@ -57,7 +53,12 @@ exports.joinMeeting = async (req, res) => {
       return res.status(401).send('unauthorized');
     };
 
-    return res.send(req.params.meetingid);
+    const meeting = await Meeting.findOne({meetingid: req.params.meetingid});
+    if (meeting) {
+      return res.status(200).send('Meeting id exists');
+    }
+
+    return res.status(404).send('Meeting Id does not exists');
   } catch (error) {
     console.log(error);
   }

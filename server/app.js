@@ -4,6 +4,7 @@ const passport = require('passport');
 const expressSession = require('express-session');
 const {passportInit} = require('./config/passport');
 const MongoDBStore = require('connect-mongodb-session')(expressSession);
+const cors = require('cors');
 
 require('dotenv').config();
 
@@ -24,6 +25,10 @@ app.use(expressSession({
   resave: false,
   saveUninitialized: false,
   store: store,
+}));
+app.use(cors({
+  origin: ['http://localhost:3000', '*'],
+  credentials: true,
 }));
 app.use(passport.initialize());
 app.use(passport.session());
