@@ -8,6 +8,7 @@ import './index.css';
 import App from './App';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Meeting from './pages/Meeting';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: '/register',
     element: <Register />,
+  },
+  {
+    path: '/:meetingId',
+    element: <Meeting />,
   },
 ]);
 
