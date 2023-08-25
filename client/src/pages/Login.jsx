@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { logUserIn } from '../services/userService';
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -11,6 +12,7 @@ export default function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    logUserIn(formData);
   };
 
   return (
