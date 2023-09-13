@@ -1,6 +1,6 @@
 const supertest = require('supertest');
 const mongoose = require('mongoose');
-const app = require('../app');
+const {server: app} = require('../app');
 const User = require('../model/User');
 require('dotenv').config();
 
@@ -74,7 +74,7 @@ test('POST /auth/login', async () => {
 
   await supertest(app)
     .post('/auth/logout')
-    .expect(302)
+    .expect(200)
     .expect((res) => {
       if (res.headers['set-cookie']) {
         throw new Error('Session cookie not deleted');
